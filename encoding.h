@@ -1,3 +1,4 @@
+#include <vector>
 using namespace std;
 
-void getFrequency(int *repeatFrequency, int * array, int arrayLen);
+void getFrequency(vector<pair<int, int>> &repeatFrequency, int * array, int arrayLen);

@@ -1,14 +1,17 @@
 #include "encoding.h"
 
-#include <map>
+#include <vector>
 #include <iostream>
 
 using namespace std;
 
 void byte_compress(int *data_ptr, int data_size) {
-    int frequencies[128] = { 0 };
+    vector<pair<int, int>> frequencies(128, make_pair(-1, -1));
 
     getFrequency(frequencies, data_ptr, data_size);
+    for (const auto freq: frequencies) {
+        cout << freq.first << " " << freq.second << endl;
+    }
 
 }
 
