@@ -11,4 +11,4 @@ HuffmanNode* buildTree(vector<pair<int,int>> repeatFrequency);
 
 void encodeFromTree(HuffmanNode* root, unordered_map<int, std::string>& huffmanCodes, std::string code = "");
 
-string getEncodedString(const int *input, const int inputLen, const unordered_map<int, string> &huffmanCodes);
+int encodeInplace(int *input, const int inputLen, const unordered_map<int, string> &huffmanCodes);

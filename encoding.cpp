@@ -64,6 +64,7 @@ void encodeFromTree(HuffmanNode* root, std::unordered_map<int, std::string>& huf
 
 int encodeInplace(int *input, const int inputLen, const unordered_map<int, string> &huffmanCodes) {
     string encodedString;
+    string segment = "";
 
     for (int i = 0; i < inputLen; i++) {
         encodedString += huffmanCodes.at(input[i]);
@@ -71,16 +72,15 @@ int encodeInplace(int *input, const int inputLen, const unordered_map<int, strin
 
     int numSegments = 0;
     for (int i = 0; i < encodedString.length(); i++) {
-        string segment = "";
-
-        for (; i < 31 && i < encodedString.length(); i++) {
-            segment += encodedString[i];
+        if (i % 30 == 0 && i) {
+            input[numSegments] = stoi(segment.c_str(), nullptr, 2);
+            segment = "";
+            numSegments += 1;
         }
 
-        input[numSegments] = stoi(segment.c_str(), nullptr, 2);
-        numSegments += 1;
+        segment += encodedString[i];
     }
 
-    return numSegments * sizeof(input[0]);
+    return numSegments;
 
 }
