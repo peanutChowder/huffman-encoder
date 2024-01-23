@@ -1,9 +1,9 @@
 #include <vector>
 #include <algorithm>
 #include <string>
-using namespace std;
 
-struct HuffmanNode;
+#include "huffmanNode.h"
+using namespace std;
 
 void getSortedFrequency(vector<pair<int, int>> &repeatFrequency, int * array, int arrayLen);
 

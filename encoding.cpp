@@ -3,16 +3,9 @@
 #include <algorithm>
 #include <queue>
 
+#include "huffmanNode.h"
+
 using namespace std;
-
-struct HuffmanNode {
-    int val;
-    int frequency;
-    HuffmanNode *left;
-    HuffmanNode *right;
-
-    HuffmanNode(int val, int frequency): val(val), frequency(frequency), left(nullptr), right(nullptr) {}
-};
 
 struct CompareNodes {
     bool operator() (HuffmanNode *a, HuffmanNode *b) {
@@ -75,6 +68,6 @@ string getEncodedString(const int *input, const int inputLen, const unordered_ma
     for (int i = 0; i < inputLen; i++) {
         encodedString += huffmanCodes.at(input[i]);
     }
-    
+
     return encodedString;
 }
