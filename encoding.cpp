@@ -4,6 +4,15 @@
 
 using namespace std;
 
+struct HuffmanNode {
+    int val;
+    int frequency;
+    HuffmanNode *left;
+    HuffmanNode *right;
+
+    HuffmanNode(int val, int frequency): val(val), frequency(frequency), left(nullptr), right(nullptr) {}
+};
+
 void getSortedFrequency(vector<pair<int, int>> &repeatFrequency, int * array, int arrayLen) {
     for (int i = 0; i < arrayLen; i++) {
         if (repeatFrequency[array[i]].first == -1) {
