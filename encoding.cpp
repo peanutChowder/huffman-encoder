@@ -57,3 +57,24 @@ HuffmanNode* buildTree(vector<pair<int,int>> repeatFrequency) {
 
     return minHeap.top();
 }
+
+void encodeFromTree(HuffmanNode* root, std::unordered_map<int, std::string>& huffmanCodes, std::string code = "") {
+    if (root) {
+        if (root->val != -1) {
+            huffmanCodes[root->val] = code;
+        }
+
+        encodeFromTree(root->left, huffmanCodes, code + "0");
+        encodeFromTree(root->right, huffmanCodes, code + "1");
+    }
+}
+
+string getEncodedString(const int *input, const int inputLen, const unordered_map<int, string> &huffmanCodes) {
+    string encodedString;
+
+    for (int i = 0; i < inputLen; i++) {
+        encodedString += huffmanCodes.at(input[i]);
+    }
+    
+    return encodedString;
+}
