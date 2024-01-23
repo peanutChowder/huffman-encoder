@@ -6,7 +6,7 @@
 
 using namespace std;
 
-string byte_compress(int *data_ptr, int data_size) {
+int byte_compress(int *data_ptr, int data_size) {
     vector<pair<int, int>> frequencies(128, make_pair(-1, -1));
 
     unordered_map<int, string> huffmanCodes;
@@ -15,9 +15,9 @@ string byte_compress(int *data_ptr, int data_size) {
 
     HuffmanNode *root = buildTree(frequencies);
     encodeFromTree(root, huffmanCodes);
-    string encodedStr = getEncodedString(data_ptr, data_size / sizeof(data_ptr[0]), huffmanCodes);
+    int encodedLen = encodeInplace(data_ptr, data_size / sizeof(data_ptr[0]), huffmanCodes);
 
-    return encodedStr;
+    return encodedLen * sizeof(data_ptr[0]);
 }
 
 void byte_decompress(int *data_ptr, int data_size) {
