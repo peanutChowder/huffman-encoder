@@ -5,7 +5,8 @@
 
 using namespace std;
 
-vector<int> decodeString(const string encodedStr, HuffmanNode *root) {
+void decodeArray(int *arr, HuffmanNode *root) {
+    string encodedStr;
     vector<int> decoded;
     const HuffmanNode *currNode = root;
 
@@ -24,5 +25,5 @@ vector<int> decodeString(const string encodedStr, HuffmanNode *root) {
             currNode = root;
         }
     }
-    return decoded;
+    
 }

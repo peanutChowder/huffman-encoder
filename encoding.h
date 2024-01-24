@@ -5,6 +5,8 @@
 #include "huffmanNode.h"
 using namespace std;
 
+pair<int, HuffmanNode*> byte_compress(int *data_ptr, int data_size);
+
 void getSortedFrequency(vector<pair<int, int>> &repeatFrequency, int * array, int arrayLen);
 
 HuffmanNode* buildTree(vector<pair<int,int>> repeatFrequency);

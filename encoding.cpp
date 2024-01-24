@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <queue>
 
-#include "huffmanNode.h"
+#include "encoding.h"
 
 using namespace std;
 
@@ -12,6 +12,20 @@ struct CompareNodes {
         return a->frequency > b->frequency;
     }
 };
+
+pair<int, HuffmanNode*> byte_compress(int *data_ptr, int data_size) {
+    vector<pair<int, int>> frequencies(128, make_pair(-1, -1));
+
+    unordered_map<int, string> huffmanCodes;
+
+    getSortedFrequency(frequencies, data_ptr, data_size / sizeof(data_ptr[0]));
+
+    HuffmanNode *root = buildTree(frequencies);
+    encodeFromTree(root, huffmanCodes);
+    int encodedLen = encodeInplace(data_ptr, data_size / sizeof(data_ptr[0]), huffmanCodes);
+
+    return make_pair(encodedLen * sizeof(data_ptr[0]), root);
+}
 
 void getSortedFrequency(vector<pair<int, int>> &repeatFrequency, int * array, int arrayLen) {
     for (int i = 0; i < arrayLen; i++) {
@@ -51,7 +65,7 @@ HuffmanNode* buildTree(vector<pair<int,int>> repeatFrequency) {
     return minHeap.top();
 }
 
-void encodeFromTree(HuffmanNode* root, std::unordered_map<int, std::string>& huffmanCodes, std::string code = "") {
+void encodeFromTree(HuffmanNode* root, unordered_map<int, string>& huffmanCodes, string code) {
     if (root) {
         if (root->val != -1) {
             huffmanCodes[root->val] = code;
